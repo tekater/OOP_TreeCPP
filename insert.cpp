@@ -58,24 +58,28 @@ public:
     }
 
     void Insert(int pos,int x) {
-        Node* ins = head;
-        for (int i = 0; i < pos; i++) {
-            if (ins->next != nullptr)
-            {
-                ins = ins->next;
-            }
-            else {
-                ins = nullptr;
-            }
+        if (pos == 0) {
+            PushHead(x);
+            return;
         }
-        if (ins->next != nullptr)
-        {
-            ins->back = ins->next;
+
+        Node* copyhead = head;
+
+        for (int i = 0; i < pos-1; i++) {
+            copyhead = copyhead->next;
+        }
+
+        Node* Next = copyhead->next;
+        Node* Back = copyhead->back;
+
+        Back->next = Next;
+
+        if (Next != nullptr) {
+            Next->back = Back;
         }
         else {
-            ins->back = nullptr;
+            tail = Back;
         }
-        ins->val = x;
     }
 
     void PopHead() {
