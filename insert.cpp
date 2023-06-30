@@ -1,4 +1,3 @@
-
 #pragma warning(disable:4996)
 
 #include <iostream>
@@ -61,11 +60,22 @@ public:
     void Insert(int pos,int x) {
         Node* ins = head;
         for (int i = 0; i < pos; i++) {
-            ins = ins->next;
+            if (ins->next != nullptr)
+            {
+                ins = ins->next;
+            }
+            else {
+                ins = nullptr;
+            }
         }
-        ins->back = ins->next;
+        if (ins->next != nullptr)
+        {
+            ins->back = ins->next;
+        }
+        else {
+            ins->back = nullptr;
+        }
         ins->val = x;
-        head = ins;
     }
 
     void PopHead() {
@@ -247,6 +257,4 @@ int main() {
     l2.Del(2);
     l2.printHead();
 
-    l2.Insert(2, 5);
-    l2.printHead();
 }
